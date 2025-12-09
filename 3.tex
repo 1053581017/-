@@ -1,4 +1,132 @@
 \chapter{连续时间信号与系统的傅里叶分析}
+
+% =========================================================
+%  NEW INSERTION: 傅里叶级数系数求解方法
+% =========================================================
+
+% ==========================================
+% 1. 定义法
+% ==========================================
+\section{定义法 (Direct Definition)}
+\begin{corebox}{核心思想}
+    \[ \ak = \frac{1}{T} \int_{T} x(t) e^{-jk\wo t} \dd t \]
+    \textbf{适用}：简单函数（常数、单项式）。
+\end{corebox}
+
+\begin{examplebox}{例 1：周期矩形脉冲}
+    $x(t)=1$ for $|t|<T_1$ within $T$.
+    \[ \ak = \frac{2\sin(k\wo T_1)}{k\wo T} = \boxed{\frac{\sin(k\wo T_1)}{k\pi}} \]
+    \small{注：$k=0$ 时需利用洛必达法则求极限，或直接求面积得 $a_0 = 2T_1/T$ (占空比)。}
+\end{examplebox}
+
+% ==========================================
+% 2. 微分冲激法
+% ==========================================
+\section{微分冲激法 (Differentiation)}
+\begin{corebox}{原理}
+    利用 $x^{(n)}(t) \FT (jk\wo)^n \ak$，将折线求导变冲激。
+\end{corebox}
+
+\begin{examplebox}{例 2：周期三角波}
+    二次求导得冲激序列 $c_k = \frac{1}{T}(2\cos(k\wo)-2)$。
+    \[ \ak = \frac{c_k}{(jk\wo)^2} = \boxed{\frac{2(1-\cos(k\frac{\pi}{2}))}{k^2\pi^2}} \]
+\end{examplebox}
+
+% 专门强调 a0 陷阱
+\begin{alertbox}{⚠️ 致命陷阱：直流分量丢失}
+    \textbf{现象}：微分法求出的 $\ak$ 在 $k=0$ 时分母为 0，公式失效。
+    \\ \textbf{物理本质}：求导操作只关注变化率，抹除了信号的“基础海拔”(直流分量)。
+    \\ \textbf{对策}：必须回到原图，通过积分计算平均值 $\displaystyle a_0 = \frac{1}{T} \int_T x(t) \dd t$。
+\end{alertbox}
+
+\begin{bookbox}{}
+    \textbf{对应正文：Example 3.6 (P206)}
+    \\ 书中在演示完微分法后特别警告："for $k=0$, the term $jk\omega_0$ is zero... consequently, \textbf{$a_0$ must be calculated by inspection.}"
+\end{bookbox}
+
+% ==========================================
+% 3. 关系式法
+% ==========================================
+\section{关系式法 (Relation to FT)}
+\begin{corebox}{公式}
+    \[ \ak = \frac{1}{T} X_{0}(jk\wo) \]
+    其中 $X_0(\jw)$ 是单周期截断信号的 FT。
+    \\ \textbf{物理意义}：周期信号的 $a_k$ 是单周期脉冲频谱的\textbf{采样}。
+\end{corebox}
+
+\begin{examplebox}{例 3：周期单边指数信号}
+    $x(t) = e^{-t} (0<t<T)$。求得 $X_0(\jw)$ 后代入关系式：
+    \[ \boxed{\ak = \frac{1 - e^{-T}}{T(1 + jk\wo)}} \]
+\end{examplebox}
+
+% ==========================================
+% 4. 等价法
+% ==========================================
+\section{等价法 (Convolution)}
+\begin{corebox}{公式}
+    \[ x(t) = \sum x_0(t-kT) \implies \ak = \frac{1}{T} X_0(jk\wo) \]
+    本质同方法 3，但物理图景是“卷积”。适用于无限长信号的叠加。
+\end{corebox}
+
+\begin{examplebox}{例 4：重温 4-17(j)}
+    $x(t) = \sum e^{-|t-2n|}$ (周期 $T=2$)。
+    \[ \ak = \frac{1}{2} X_0(jk\pi) = \boxed{\frac{1}{1 + k^2\pi^2}} \]
+\end{examplebox}
+
+\newpage
+
+% ==========================================
+% 5. 考场救命补丁 (核心精华)
+% ==========================================
+\section{⚡ 考场救命补丁 (Essential Checklists)}
+\textit{算完 $a_k$ 后，利用以下直觉快速验算，防止低级错误！}
+
+% --- 建议 1 ---
+\subsection*{1. 对称性速查 (Symmetry Check)}
+
+\begin{alertbox}{不计算直接预判虚实性}
+    \begin{itemize}
+        \item $x(t)$ \textbf{实偶} $\implies \ak$ 必为 \textbf{实偶}。
+        \item $x(t)$ \textbf{实奇} $\implies \ak$ 必为 \textbf{纯虚奇}。
+        \item $x(t)$ \textbf{半波对称} ($x(t \pm T/2) = -x(t)$) $\implies$ \textbf{偶次谐波 $a_{2k}=0$}。
+    \end{itemize}
+\end{alertbox}
+
+\begin{bookbox}{}
+    \textbf{对应习题：Problem 3.21 ("连连看")}
+    \\ 题目给出 6 个波形和 6 组性质，要求\textbf{不计算}直接配对。专门训练“一眼定虚实”的直觉。
+\end{bookbox}
+
+% --- 建议 2 ---
+\subsection*{2. 收敛性判据 (Decay Rate)}
+
+\begin{alertbox}{看分母阶数知对错}
+    \begin{itemize}
+        \item 信号有\textbf{跳变} (如方波) $\implies |\ak| \propto \frac{1}{k}$
+        \item 信号连续但\textbf{折角} (如三角波) $\implies |\ak| \propto \frac{1}{k^2}$
+        \item 信号 $n$ 阶导数才不连续 $\implies |\ak| \propto \frac{1}{k^{n+2}}$
+    \end{itemize}
+\end{alertbox}
+
+\begin{bookbox}{}
+    \textbf{对应习题：Problem 3.16}
+    \\ 给出三个不同光滑度的波形（矩形、三角、抛物线），要求连线对应的衰减速率 ($1/k, 1/k^2$)。
+\end{bookbox}
+
+% --- 建议 3 ---
+\subsection*{3. 功率守恒 (Parseval's Relation)}
+
+\begin{alertbox}{必考公式}
+    \[ P_{avg} = \frac{1}{T} \int_T |x(t)|^2 \dd t = \sum_{k=-\infty}^{\infty} |\ak|^2 \]
+    \textbf{注意}：这是检查 $a_k$ 幅度是否合理的最终防线。
+\end{alertbox}
+
+\newpage
+
+% =========================================================
+%  ORIGINAL CONTENT
+% =========================================================
+
 \section{帕斯瓦尔定理}
 \subsection{能量公式（针对能量信号 / 非周期信号）}
 
@@ -65,7 +193,8 @@
     \item \textbf{取特值 $\omega = 0$}：
     \begin{itemize}
         \item 等式左边（时域）：令 $\omega=0$，即 $e^{-j0}=1$，变为时域积分 $\int_{-\infty}^{+\infty} f(t)g(t) dt$。
-        \item 等式右边（频域）：将 $\omega=0$ 代入卷积公式：
+        
+\item 等式右边（频域）：将 $\omega=0$ 代入卷积公式：
         \begin{equation*}
             = \frac{1}{2\pi} \int_{-\infty}^{+\infty} F(u)G(0-u) du = \frac{1}{2\pi} \int_{-\infty}^{+\infty} F(u)G(-u) du
         \end{equation*}
@@ -258,7 +387,8 @@ g_\tau(t) = \begin{cases}
         \toprule
         \textbf{性质} & \textbf{时域} $x(t)$ & \textbf{频域} $X(j\omega)$ & \textbf{记忆要点} \\
         \midrule
-        时移 (Time Shift) & $x(t-t_0)$ & $e^{-j\omega t_0}X(j\omega)$ & 幅度不变，相位线性变化 \\
+       
+ 时移 (Time Shift) & $x(t-t_0)$ & $e^{-j\omega t_0}X(j\omega)$ & 幅度不变，相位线性变化 \\
         频移 (Freq Shift) & $e^{j\omega_0 t}x(t)$ & $X(j(\omega-\omega_0))$ & 调制特性 (Modulation) \\
         尺度变换 (Scaling) & $x(at)$ & $\frac{1}{|a|}X(j\frac{\omega}{a})$ & 时域压缩 $\FT$ 频域扩展 \\
         时间反转 (Reversal) & $x(-t)$ & $X(-j\omega)$ & 若 $x(t)$ 为实数，则共轭 \\
@@ -274,7 +404,8 @@ g_\tau(t) = \begin{cases}
 
 \begin{table}[h!]
     \centering
-    \renewcommand{\arraystretch}{1.4}
+    
+\renewcommand{\arraystretch}{1.4}
     \begin{tabularx}{\textwidth}{@{} l L L @{}}
         \toprule
         \textbf{信号 $x(t)$ 的特性} & \textbf{频谱 $X(j\omega)$ 的特性} & \textbf{数学表达} \\
@@ -283,14 +414,15 @@ g_\tau(t) = \begin{cases}
         \textbf{实信号 (Real)} & \textbf{共轭对称} & $X(j\omega) = X^*(-j\omega)$ \\
         & \small{(模偶，相奇，实部偶，虚部奇)} & \\
         \textbf{实偶信号} & \textbf{实偶函数} & $X(j\omega) = R(\omega)$ \small{(纯实数，偶函数)} \\
-        \textbf{实奇信号} & \textbf{虚奇函数} & $X(j\omega) = jI(\omega)$ \small{(纯虚数，奇函数)} \\
+ 
+       \textbf{实奇信号} & \textbf{虚奇函数} & $X(j\omega) = jI(\omega)$ \small{(纯虚数，奇函数)} \\
         实信号的偶部 & 对应频谱的\textbf{实部} & $\mathcal{Ev}\{x(t)\} \FT \mathcal{Re}\{X(j\omega)\}$ \\
         实信号的奇部 & 对应频谱的\textbf{虚部} & $\mathcal{Od}\{x(t)\} \FT j\mathcal{Im}\{X(j\omega)\}$ \\
         \bottomrule
     \end{tabularx}
 \end{table}
 
-\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black, title=�� 记忆口诀]
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black, title= 记忆口诀]
 实偶对实偶，实奇对虚奇；偶部对实部，奇部对虚部（注意虚部有个 $j$）。
 \end{tcolorbox}
 
@@ -305,7 +437,8 @@ g_\tau(t) = \begin{cases}
     \[ x(t) * h(t) \FT X(j\omega)H(j\omega) \]
     
     \item \textbf{时域相乘 (Modulation)}: 通常用于调制或加窗。
-    \[ x(t)p(t) \FT \frac{1}{2\pi} [X(j\omega) * P(j\omega)] \]
+    \[ 
+x(t)p(t) \FT \frac{1}{2\pi} [X(j\omega) * P(j\omega)] \]
     
     \item \textbf{对偶性 (Duality)}: 解决 $t$ 域出现 Sinc 函数等难题。
     \[ \boxed{X(t) \FT 2\pi x(-\omega)} \]
@@ -315,7 +448,7 @@ g_\tau(t) = \begin{cases}
 % ==========================================
 % 5. 解题策略
 % ==========================================
-\section*{�� 解题策略：最优计算顺序 (The Algorithm)}
+\section*{ 解题策略：最优计算顺序 (The Algorithm)}
 \begin{tcolorbox}[colback=green!5!white, colframe=green!50!black]
 当遇到复杂信号求变换时，建议按照以下优先级进行拆解：
 \begin{enumerate}
@@ -353,7 +486,8 @@ g_\tau(t) = \begin{cases}
 \textbf{分析 $k$ 的奇偶性：}
 \begin{itemize}
     \item 当 $k$ 为偶数：$1 - 1 = 0 \implies a_k = 0$
-    \item 当 $k$ 为奇数：$1 - (-1) = 2 \implies a_k = \frac{2}{2T} = \frac{1}{T}$
+    \item 当 $k$ 为奇数：$1 - (-1) = 
+2 \implies a_k = \frac{2}{2T} = \frac{1}{T}$
 \end{itemize}
 
 \paragraph{Step 2: 构建傅里叶变换 $Q(j\omega)$}

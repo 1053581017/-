@@ -1,7 +1,7 @@
+% =========================================================
+%  1. 基础设置与数学符号
+% =========================================================
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
-
-\definecolor{customcolor}{RGB}{32,178,170}
-\colorlet{coverlinecolor}{customcolor}
 \renewcommand{\theequation}{\thechapter.\arabic{equation}}
 
 \usepackage{listofitems}
@@ -11,65 +11,103 @@
 }
 
 \usepackage{dsfont}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
 
-
-\newcommand{\ve}{\varepsilon}
-\DeclareMathOperator{\Int}{Int}
-\DeclareMathOperator{\Ext}{Ext}
-\DeclareMathOperator{\diam}{diam}
-
-
+% --- 常用算子与简写 ---
 \renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\z}{\left}
+\newcommand{\y}{\right}
+\newcommand{\sss}{\sum_{i=1}^{n}}
+\newcommand{\ve}{\varepsilon}
 
+% --- 数集符号 ---
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\FF}{\mathbb{F}}
-\newcommand{\RP}{\mathbb{R}\mathbb{P}}
-\newcommand{\CP}{\mathbb{C}\mathbb{P}}
-\renewcommand{\P}{\mathcal{P}}
 
-
-\newcommand{\z}{\left}
-\newcommand{\y}{\right}
-
-\newcommand{\letgroup}{令$(G,\cdot)$是一个群}
-\newcommand{\letaction}{令$\phi:(G,\cdot)\to (\perm(S),\circ)$是一个$G$在$S$的群作用}
+% --- 算子定义 ---
+\DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\ima}{im}
-\DeclareMathOperator{\perm}{Perm}
-\DeclareMathOperator{\orb}{Orb}
-\DeclareMathOperator{\stab}{Stab}
-
-
-\newcommand{\letring}{令$(R,+,\cdot)$是一个环}
-\newcommand{\letcommring}{令$(R,+,\cdot)$是一个交换环}
-\newcommand{\letintdom}{令$(R,+,\cdot)$是一个整环}
-\newcommand{\letpid}{令$(R,+,\cdot)$是一个主理想整环}
-\newcommand{\letufd}{令$(R,+,\cdot)$是一个唯一分解整环}
-\newcommand{\letucd}{令$(R,+,\cdot)$是一个最大公因数整环}
-\newcommand{\leted}{令$(R,+,\cdot)$是一个欧几里得整环}
-\newcommand{\letfield}{令$(F,+,\cdot)$是一个域}
-\DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\cont}{cont}
-%\DeclareMathOperator{\ch}{char}
-\newcommand{\letext}{令$F/E$是一个域扩张}
-
-\newcommand{\lethomring}{令$f:(R,+,\cdot)\to (R',+,\cdot)$是一个环同态}
-\newcommand{\p}{\mathfrak{p}}
-\newcommand{\m}{\mathfrak{m}}
-
-
-\newcommand{\sss}{\sum_{i=1}^{n}}
-\DeclareMathOperator{\F}{Frac}
-
 \DeclareMathOperator{\spn}{span}
-
-
 \DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\A}{\mathds{A}}\DeclareMathOperator{\G}{Gal}
 \DeclareMathOperator{\Tr}{Tr}
 \renewcommand{\O}{\mathcal{O}}
-
+\renewcommand{\P}{\mathcal{P}}
 \DeclareMathOperator{\del}{\partial}
+
+% =========================================================
+%  2. 信号与系统专用简写 (防止报错)
+% =========================================================
+\newcommand{\ak}{a_k}               % 傅里叶级数系数
+\newcommand{\wo}{\omega_0}          % 基波角频率
+\newcommand{\jw}{j\omega}           % 虚频
+\providecommand{\dd}{}\renewcommand{\dd}{\,\mathrm{d}} % 微分算子
+
+% =========================================================
+%  3. 配色方案：莫兰迪·高级灰 (Morandi Style)
+% =========================================================
+% 定义基础色 (低饱和度，护眼)
+\definecolor{MorandiBlue}{RGB}{102, 129, 149}     % 雾霾蓝 (沉稳)
+\definecolor{MorandiGreen}{RGB}{138, 157, 122}    % 橄榄绿 (自然)
+\definecolor{MorandiYellow}{RGB}{204, 169, 114}   % 姜黄 (柔和提醒)
+\definecolor{MorandiRed}{RGB}{196, 142, 142}      % 豆沙红 (重点)
+\definecolor{MorandiBrown}{RGB}{166, 153, 140}    % 暖灰 (引用)
+
+% 应用到 ElegantBook 全局变量
+\definecolor{structurecolor}{named}{MorandiBlue}  % 章节/目录/页眉
+\definecolor{main}{named}{MorandiGreen}           % 定义/例题环境
+\definecolor{second}{named}{MorandiYellow}        % 定理环境
+\definecolor{third}{named}{MorandiRed}            % 结论环境
+\colorlet{coverlinecolor}{MorandiBlue}            % 封面线条
+
+% =========================================================
+%  4. 自定义文本框 (已修改为跟随莫兰迪配色)
+% =========================================================
+
+% 1. 核心思想框 (Core Box) -> 跟随主色调 (雾霾蓝)
+\newtcolorbox{corebox}[1]{
+  colback=structurecolor!10!white,   % 背景色：淡蓝
+  colframe=structurecolor,           % 边框色：雾霾蓝
+  fonttitle=\bfseries,
+  title={#1},
+  enhanced,
+  attach boxed title to top left={yshift=-2mm, xshift=2mm},
+  boxed title style={colback=structurecolor}
+}
+
+% 2. 例题框 (Example Box) -> 跟随 Main 色 (橄榄绿)
+\newtcolorbox{examplebox}[1]{
+  colback=main!10!white,             % 背景色：淡绿
+  colframe=main,                     % 边框色：橄榄绿
+  fonttitle=\bfseries,
+  title={#1},
+  enhanced,
+  attach boxed title to top left={yshift=-2mm, xshift=2mm},
+  boxed title style={colback=main}
+}
+
+% 3. 警告/陷阱框 (Alert Box) -> 跟随 Third 色 (豆沙红)
+\newtcolorbox{alertbox}[1]{
+  colback=third!10!white,            % 背景色：淡红
+  colframe=third,                    % 边框色：豆沙红
+  fonttitle=\bfseries,
+  title={#1},
+  enhanced,
+  attach boxed title to top left={yshift=-2mm, xshift=2mm},
+  boxed title style={colback=third}
+}
+
+% 4. 教材引用框 (Book Box) -> 独立颜色 (莫兰迪棕)
+\newtcolorbox{bookbox}[1]{
+  colback=MorandiBrown!10!white,     % 背景色：淡褐
+  colframe=MorandiBrown,             % 边框色：暖灰
+  fonttitle=\bfseries,
+  title={#1},
+  enhanced,
+  attach boxed title to top left={yshift=-2mm, xshift=2mm},
+  boxed title style={colback=MorandiBrown}
+}
