@@ -1,0 +1,57 @@
+\chapter{考研数学一常用泰勒展开公式汇总}
+\author{}
+\date{}
+
+在考研数学中，泰勒展开是极限、级数等题目的重要工具。以下是必须熟练掌握的常用展开式：
+
+\section{基本初等函数的泰勒展开}
+
+\subsection{指数函数}
+\begin{equation}
+e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} + o(x^n)
+\end{equation}
+收敛域：$(-\infty, +\infty)$
+
+\subsection{对数函数}
+\begin{equation}
+\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots + (-1)^{n-1}\frac{x^n}{n} + o(x^n)
+\end{equation}
+收敛域：$(-1, 1]$
+
+\subsection{三角函数}
+\begin{equation}
+\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots + (-1)^n\frac{x^{2n+1}}{(2n+1)!} + o(x^{2n+1})
+\end{equation}
+
+\begin{equation}
+\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots + (-1)^n\frac{x^{2n}}{(2n)!} + o(x^{2n})
+\end{equation}
+
+\begin{equation}
+\tan x = x + \frac{x^3}{3} + \frac{2x^5}{15} + \frac{17x^7}{315} + \cdots
+\end{equation}
+（前几项，$|x| < \frac{\pi}{2}$）
+
+\subsection{反三角函数}
+\begin{equation}
+\arcsin x = x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{15x^7}{336} + \cdots
+\end{equation}
+收敛域：$|x| \leq 1$
+
+\begin{equation}
+\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots + (-1)^n\frac{x^{2n+1}}{2n+1} + o(x^{2n+1})
+\end{equation}
+收敛域：$|x| \leq 1$
+
+\section{幂函数的展开}
+\begin{equation}
+(1+x)^{\alpha} = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \frac{\alpha(\alpha-1)(\alpha-2)}{3!}x^3 + \cdots
+\end{equation}
+收敛域：$|x| < 1$
+
+\subsection{特殊情形}
+\begin{itemize}
+\item $(1+x)^{-1} = 1 - x + x^2 - x^3 + x^4 - \cdots$
+\item $(1-x)^{-1} = 1 + x + x^2 + x^3 + x^4 + \cdots$
+\item $(1+x)^{1/2} = 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} - \cdots$
+\end{itemize}

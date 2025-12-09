@@ -1,0 +1,69 @@
+\documentclass[cn,10pt,math=newtx,citestyle=gb7714-2015,bibstyle=gb7714-2015]{0-figure/elegantbook}
+
+\usepackage{CJKfntef}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage[utf8]{inputenc}
+%\usepackage{caption}
+\usepackage{chemformula}
+\usepackage{svg}
+\usepackage{extarrows}
+% --- 数学与符号 ---
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+
+% --- 表格与排版 ---
+\usepackage{booktabs}       % 专业三线表 (\toprule, \midrule, \bottomrule)
+\usepackage{tabularx}       % 自适应宽度表格
+\usepackage{array}          % 表格列格式增强
+\usepackage{enumitem}       % 列表格式控制
+
+% --- 颜色与装饰 ---
+\usepackage{xcolor}
+\usepackage{tcolorbox}      % 文本框 (用于强调口诀和策略)
+\tcbuselibrary{skins}
+
+% --- 自定义命令 ---
+\newcommand{\FT}{\leftrightarrow}  % 定义傅里叶变换双向箭头简写
+% 定义左对齐自适应列，便于长公式排版
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+%\usepackage{0-figure/extrarelation}
+\usepackage{tikz-3dplot}
+
+\usetikzlibrary{cd}
+\cover{0-figure/cover.jpg}
+\logo{0-figure/science-and-mind.jpg}
+\input{newcommand}
+
+\title{LaTeX+Overleaf考研信号与系统}
+\author{小小叉车}
+\date{\today}
+
+\begin{document}
+\maketitle
+\frontmatter
+
+\newpage
+
+\tableofcontents
+\mainmatter
+
+
+\input{1}
+\newpage
+
+\input{2}
+\newpage
+
+\input{3}
+\newpage
+\input{4}
+\newpage
+
+\input{5}
+\newpage
+\input{6}
+\newpage
+\printbibliography
+\end{document}
