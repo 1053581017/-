@@ -114,3 +114,10 @@
   \readlist\thecycle{#2}%
   (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else#1\fi\i})%
 }
+
+% =========================================================
+%  5. 表格设置 (修复 Illegal pream-token L 报错)
+% =========================================================
+% 定义左对齐自适应列 'L'，用于长公式表格排版
+% 必须在加载了 tabularx 和 array 包之后使用
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
