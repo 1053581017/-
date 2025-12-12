@@ -1,5 +1,24 @@
 % =========================================================
-%  1. 莫兰迪配色方案 (Morandi Style) - 优先加载
+%  1. 核心宏包与环境配置 (Core Packages)
+% =========================================================
+% 确保 tcolorbox 库已加载 (ElegantBook 已加载基础包，这里加载扩展库)
+\tcbuselibrary{skins, breakable, theorems}
+
+% 修复数学公式编号格式 (防止报错)
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+
+% =========================================================
+%  2. 表格与列格式定义 (Fix: Illegal pream-token L)
+% =========================================================
+% 定义左对齐自适应列 'L'，解决 3.tex 中的表格报错
+% 必须在 main.tex 加载了 tabularx 和 array 包后生效
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+% 表格单元格颜色辅助命令
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% =========================================================
+%  3. 莫兰迪配色方案 (Morandi Style)
 % =========================================================
 % 定义低饱和度护眼色
 \definecolor{MorandiBlue}{RGB}{102, 129, 149}     % 雾霾蓝 (主色)
@@ -8,7 +27,7 @@
 \definecolor{MorandiRed}{RGB}{196, 142, 142}      % 豆沙红 (结论/警告)
 \definecolor{MorandiBrown}{RGB}{166, 153, 140}    % 暖灰 (引用)
 
-% 强制覆盖 ElegantBook 全局变量
+% 强制覆盖 ElegantBook 全局变量，实现换肤
 \definecolor{structurecolor}{named}{MorandiBlue} 
 \definecolor{main}{named}{MorandiGreen}
 \definecolor{second}{named}{MorandiYellow}
@@ -16,9 +35,8 @@
 \colorlet{coverlinecolor}{MorandiBlue}
 
 % =========================================================
-%  2. 自定义文本框 (tcolorbox)
+%  4. 自定义文本框定义 (Fix: Environment undefined)
 % =========================================================
-% ElegantBook 已加载 tcolorbox[many]，直接定义即可
 
 % 1. 核心思想框 (Core Box) - 蓝色系
 \newtcolorbox{corebox}[1]{
@@ -28,7 +46,8 @@
   fonttitle=\bfseries,
   title={#1},
   attach boxed title to top left={yshift=-2mm, xshift=2mm},
-  boxed title style={colback=structurecolor}
+  boxed title style={colback=structurecolor},
+  breakable
 }
 
 % 2. 例题框 (Example Box) - 绿色系
@@ -39,7 +58,8 @@
   fonttitle=\bfseries,
   title={#1},
   attach boxed title to top left={yshift=-2mm, xshift=2mm},
-  boxed title style={colback=main}
+  boxed title style={colback=main},
+  breakable
 }
 
 % 3. 警告/陷阱框 (Alert Box) - 红色系
@@ -50,7 +70,8 @@
   fonttitle=\bfseries,
   title={#1},
   attach boxed title to top left={yshift=-2mm, xshift=2mm},
-  boxed title style={colback=third}
+  boxed title style={colback=third},
+  breakable
 }
 
 % 4. 教材引用框 (Book Box) - 棕色系
@@ -61,27 +82,31 @@
   fonttitle=\bfseries,
   title={#1},
   attach boxed title to top left={yshift=-2mm, xshift=2mm},
-  boxed title style={colback=MorandiBrown}
+  boxed title style={colback=MorandiBrown},
+  breakable
 }
 
 % =========================================================
-%  3. 信号与系统专用简写 (Fix Undefined control sequence)
+%  5. 信号与系统专用简写 (Fix: Undefined control sequence)
 % =========================================================
-\providecommand{\ak}{} \renewcommand{\ak}{a_k}       % 傅里叶系数
-\providecommand{\wo}{} \renewcommand{\wo}{\omega_0}  % 基波频率
+% 使用 providecommand 确保不冲突，然后 renew 强制生效
+\providecommand{\ak}{} \renewcommand{\ak}{a_k}       % 傅里叶级数系数
+\providecommand{\wo}{} \renewcommand{\wo}{\omega_0}  % 基波角频率
 \providecommand{\jw}{} \renewcommand{\jw}{j\omega}   % 虚频
 \providecommand{\dd}{} \renewcommand{\dd}{\,\mathrm{d}} % 微分算子
-\providecommand{\FT}{} \renewcommand{\FT}{\longleftrightarrow} % 变换箭头
+\providecommand{\FT}{} \renewcommand{\FT}{\longleftrightarrow} % 傅里叶变换箭头
 
 % =========================================================
-%  4. 通用数学符号与设置
+%  6. 通用数学符号与工具
 % =========================================================
-% 修复公式编号
-\renewcommand{\theequation}{\thechapter.\arabic{equation}}
-
-% 辅助宏包
 \usepackage{listofitems}
 \usepackage{dsfont}
+
+% 循环命令
+\newcommand\cycle[2][\,]{%
+  \readlist\thecycle{#2}%
+  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else#1\fi\i})%
+}
 
 % 常用算子
 \providecommand{\iff}{} \renewcommand{\iff}{\Leftrightarrow}
@@ -90,7 +115,7 @@
 \newcommand{\sss}{\sum_{i=1}^{n}}
 \newcommand{\ve}{\varepsilon}
 
-% 数集符号
+% 数集符号 (\R, \N 等)
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -98,7 +123,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\FF}{\mathbb{F}}
 
-% 算子定义
+% 高级数学算子定义
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\ima}{im}
 \DeclareMathOperator{\spn}{span}
@@ -107,17 +132,3 @@
 \renewcommand{\O}{\mathcal{O}}
 \renewcommand{\P}{\mathcal{P}}
 \DeclareMathOperator{\del}{\partial}
-
-% 颜色块辅助
-\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
-\newcommand\cycle[2][\,]{%
-  \readlist\thecycle{#2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else#1\fi\i})%
-}
-
-% =========================================================
-%  5. 表格设置 (修复 Illegal pream-token L 报错)
-% =========================================================
-% 定义左对齐自适应列 'L'，用于长公式表格排版
-% 必须在加载了 tabularx 和 array 包之后使用
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}
