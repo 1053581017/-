@@ -63,7 +63,24 @@
     \[ x(t) = \sum x_0(t-kT) \implies \ak = \frac{1}{T} X_0(jk\wo) \]
     本质同方法 3，但物理图景是“卷积”。适用于无限长信号的叠加。
 \end{corebox}
+% ==========================================
+%  NEW SECTION: 周期信号的傅里叶变换
+% ==========================================
+\subsection{周期信号的傅里叶变换 (FT of Periodic Signals)}
+\begin{corebox}{核心公式}
+    对于周期为 $T$、基波频率为 $\wo = \frac{2\pi}{T}$ 的周期信号 $x(t)$，其傅里叶变换由一系列冲激函数组成：
+    \[ X(j\omega) = \sum_{k=-\infty}^{\infty} 2\pi \ak \delta(\omega - k\wo) \]
+    \textbf{物理意义}：
+    \begin{itemize}
+        \item 周期信号的频谱在频域是\textbf{离散}的。
+        \item 能量集中在谐波频率 $k\wo$ 处。
+        \item 每个冲激的强度（面积）是其傅里叶级数系数 $\ak$ 的 $2\pi$ 倍。
+    \end{itemize}
+\end{corebox}
 
+\begin{examplebox}{推导思路}
+    利用傅里叶级数展开式 $x(t) = \sum_{k=-\infty}^{\infty} \ak e^{jk\wo t}$，并结合复指数信号的变换对 $e^{j\omega_c t} \FT 2\pi\delta(\omega-\omega_c)$，利用线性性质逐项求和即可得证。
+\end{examplebox}
 \begin{examplebox}{例 4：重温 4-17(j)}
     $x(t) = \sum e^{-|t-2n|}$ (周期 $T=2$)。
     \[ \ak = \frac{1}{2} X_0(jk\pi) = \boxed{\frac{1}{1 + k^2\pi^2}} \]
