@@ -1,0 +1,133 @@
+\chapter{算子法求解微分方程特解的“四大杀手锏”规则}
+\begin{center}
+    
+\end{center}
+
+\section{通用共振处理逻辑（求导法则）}
+当直接代入导致分母 $L(D) = 0$ 时，使用“分母求导”公式。
+
+\textbf{公式：}
+\[
+\frac{1}{L(D)} f(x) = x \cdot \frac{1}{L'(D)} f(x)
+\]
+
+\begin{itemize}
+    \item \textbf{操作口诀：} 分母为零别慌张，\textbf{分子乘 $x$，分母求导}，然后再试一次。如果还为 0，就再乘 $x$ 再求导。
+\end{itemize}
+
+\section{规则一：指数函数 $f(x) = e^{\lambda x}$ （代入规则）}
+
+\textbf{1. 常规情况 ($L(\lambda) \neq 0$)：}
+直接用 $\lambda$ 代替 $D$。
+\[
+y^* = \frac{1}{L(\lambda)} e^{\lambda x}
+\]
+
+\textbf{2. 共振情况 ($L(\lambda) = 0$)：}
+使用求导法则。
+\[
+y^* = x \cdot \frac{1}{L'(\lambda)} e^{\lambda x}
+\]
+(注：若 $L'(\lambda)$ 仍为 0，则继续求导变为 $x^2 \cdot \frac{1}{L''(\lambda)} e^{\lambda x}$)
+
+\begin{itemize}
+    \item \textbf{例：} $(D-2)^2 y = e^{2x}$
+    \begin{itemize}
+        \item \textbf{分析：} 代入 $D=2$ 分母为 0。
+        \item \textbf{一次求导：} $x \cdot \frac{1}{2(D-2)} e^{2x}$ （再次代入 $D=2$ 仍为 0）
+        \item \textbf{二次求导：} $x^2 \cdot \frac{1}{2} e^{2x} = \frac{1}{2}x^2 e^{2x}$
+    \end{itemize}
+\end{itemize}
+
+\section{规则二：三角函数 $f(x) = \sin(\omega x)$ 或 $\cos(\omega x)$ （平方代入规则）}
+
+\textbf{1. 常规情况 ($L(-\omega^2) \neq 0$)：}
+如果算子 $L(D)$ 中只含有 $D^2$ 的项（或者能化简出 $D^2$），可以用 $-\omega^2$ 代替 $D^2$。
+
+\textbf{2. 共振情况 ($L(-\omega^2) = 0$)：}
+使用求导法则（注意是对 $D$ 求导）。
+\[
+y^* = x \cdot \frac{1}{L'(D)} \sin(\omega x)
+\]
+通常求导后分母会变成含 $D$ 的一阶式，此时利用 $\frac{1}{D} = \int dx$ 进行积分。
+
+\begin{itemize}
+    \item \textbf{例：} $(D^2 + 4)y = \sin(2x)$
+    \begin{itemize}
+        \item \textbf{分析：} 代入 $D^2 = -4$ 分母为 0。
+        \item \textbf{分母求导：} $(D^2+4)' = 2D$
+        \item \textbf{应用法则：} 
+        \[
+        y^* = x \cdot \frac{1}{2D} \sin(2x) = \frac{x}{2} \int \sin(2x) \, dx = -\frac{x}{4}\cos(2x)
+        \]
+    \end{itemize}
+\end{itemize}
+
+\section{规则三：多项式 $f(x) = P_n(x)$ （级数展开规则）}
+
+利用泰勒级数展开，将逆算子 $\frac{1}{L(D)}$ 展开成 $D$ 的幂级数。
+
+\textbf{★ 关键：如何判断展开阶数？}
+看多项式 $P_n(x)$ 的最高次数 $n$，级数展开只需\textbf{保留到 $D^n$ 项}。
+\begin{itemize}
+    \item \textbf{原理：} $D^{n+1} P_n(x) = 0$（更高阶导数为 0，直接舍弃）。
+    \item \textbf{速判：} 
+    \begin{itemize}
+        \item 针对 $x$ (1次) $\rightarrow$ 保留到 $D$。
+        \item 针对 $x^2$ (2次) $\rightarrow$ 保留到 $D^2$。
+    \end{itemize}
+\end{itemize}
+
+\textbf{1. 常规情况（有常数项）：}
+直接按泰勒级数展开。
+
+\textbf{2. 共振情况（无常数项）：}
+当算子最低次项为 $D^k$ 时（对应 0 特征根），使用\textbf{提公因式法}。
+
+\begin{itemize}
+    \item \textbf{步骤：}
+    \begin{enumerate}
+        \item 提出分母中最低次的 $D^k$。
+        \item 对剩下的部分进行级数展开（保留至 $D^n$）。
+        \item 最后进行 $k$ 次积分（因为 $\frac{1}{D}$ 等价于积分）。
+    \end{enumerate}
+    \item \textbf{例：} $(D^2 - D)y = x$
+    \begin{itemize}
+        \item \textbf{推导：} 提出 $D$，剩下 $\frac{1}{D-1}$ 对 $x$ (1次) 展开至 $D$ 项。
+        \[
+        y^* = \frac{1}{D(D-1)} x = \frac{1}{D} \left[ -(1+D) \right] x = -\frac{1}{D}(x+1) = -(\frac{x^2}{2} + x)
+        \]
+    \end{itemize}
+\end{itemize}
+
+\section{规则四：移位定理（Shift Theorem）}
+当 $f(x)$ 是指数函数与其他函数的乘积时，可以将指数函数“移”到算子左边，同时算子中的 $D$ 变为 $D+\lambda$。
+
+\textbf{公式：}
+\[
+\frac{1}{L(D)} [e^{\lambda x} v(x)] = e^{\lambda x} \frac{1}{L(D+\lambda)} v(x)
+\]
+
+\begin{itemize}
+    \item \textbf{应用场景：} 处理乘积形式，或者用于化简复杂的共振。
+    \item \textbf{与求导法则联动：} 如果移位后，剩下的算子对 $v(x)$ 处理时依然分母为 0，则继续对剩下的部分使用求导法则。
+    \item \textbf{例：} $(D-1)y = e^x$
+    \begin{itemize}
+        \item \textbf{方法 A (移位法)：} 看作 $e^x \cdot 1$。
+        \[
+        y^* = e^x \frac{1}{(D+1)-1} \cdot 1 = e^x \frac{1}{D} \cdot 1 = x e^x
+        \]
+        \item \textbf{方法 B (直接求导法)：} 直接看 $e^x$，代入 $D=1$ 分母为 0。
+        \[
+        y^* = x \cdot \frac{1}{(D-1)'} e^x = x \cdot \frac{1}{1} e^x = x e^x
+        \]
+    \end{itemize}
+\end{itemize}
+
+\section{总结：什么时候用什么？}
+\begin{itemize}
+    \item 看到 $e^{\lambda x}$ $\rightarrow$ \textbf{直接代}。分母为 0？ $\rightarrow$ \textbf{分子乘 $x$，分母求导}。
+    \item 看到 $\sin / \cos$ $\rightarrow$ \textbf{代 $D^2$}。分母为 0？ $\rightarrow$ \textbf{分子乘 $x$，分母求导}（然后积分）。
+    \item 看到 $e^{\lambda x} \cdot \dots$ $\rightarrow$ \textbf{先移位}，把 $e$ 移走，再处理剩下的。
+    \item 看到多项式 $\rightarrow$ \textbf{展开}（保留至 $D^n$）。没常数项？ $\rightarrow$ \textbf{提 $D$ 积分}。
+\end{itemize}

@@ -1,0 +1,66 @@
+\documentclass[cn,10pt,citestyle=gb7714-2015,bibstyle=gb7714-2015]{0-figure/elegantbook}
+
+\usepackage{CJKfntef}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage[utf8]{inputenc}
+%\usepackage{caption}
+\usepackage{chemformula}
+\usepackage{svg}
+\usepackage{extarrows}
+%\usepackage{0-figure/extrarelation}
+\usepackage{tikz-3dplot}
+\usepackage{amsmath} % 数学公式宏包
+\usepackage{booktabs} % 专业表格样式
+\usepackage{tabularx} % 自适应宽度表格
+\usepackage{geometry} % 设置页面几何
+\usepackage{enumitem} % 控制列表间距
+
+% 设置页边距
+\geometry{a4paper, margin=1in}
+
+% 设置在表格单元格中使用列表时的间距
+\setlist[itemize]{leftmargin=*, itemsep=0pt, topsep=2pt}
+\setlist[enumerate]{leftmargin=*, itemsep=0pt, topsep=2pt}
+\usetikzlibrary{cd}
+\cover{0-figure/cover.jpg}
+\logo{0-figure/science-and-mind.jpg}
+\input{newcommand}
+
+\title{LaTeX+Overleaf考研数学一}
+\author{小小叉车}
+\date{\today}
+
+\begin{document}
+\maketitle
+\frontmatter
+
+\newpage
+
+\tableofcontents
+\mainmatter
+
+
+\input{1}
+\newpage
+
+\input{2}
+\newpage
+
+\input{3}
+\newpage
+\input{4}
+\newpage
+
+\input{5}
+\newpage
+\input{6}
+\newpage
+\input{11}
+\newpage
+\input{12}
+\newpage
+\input{线代}
+\newpage
+\printbibliography
+\end{document}

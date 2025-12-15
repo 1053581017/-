@@ -1,0 +1,251 @@
+\chapter{标注小技巧}\label{ch:crossref}
+\section*{第一部分：曲线积分 (Curve Integrals)}
+
+\subsection*{一、第一类曲线积分（对弧长的曲线积分）}
+% 使用 tabularx 环境，使表格宽度适应文本宽度
+% 列定义：p{固定宽度} 和 X{自适应宽度}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{2.5cm} p{3.5cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    对称性与两点法 & 积分曲线L关于坐标轴（如x轴、y轴）对称。 & 根据被积函数 $f(x,y)$ 关于对应变量的奇偶性判断积分结果。
+    \begin{enumerate}
+        \item 若为奇函数，积分为0。
+        \item 若为偶函数，积分等于在单侧曲线上积分的2倍。
+    \end{enumerate} & \textbf{【两点法】}（简化计算/推导结论）
+    \newline 用于快速判断对称性，无需记忆公式：
+    \begin{enumerate}
+        \item 写出点P关于对称轴的对称点P'。
+        \item 写出P和P'对应的被积分式（\textbf{注意：第一类积分中ds不变}）。
+        \item 两式相加。若和为零，则总积分为0。
+    \end{enumerate} \\
+    \midrule
+    
+    对称性与两点法 & \textbf{特殊对称性（变量对称性）}：积分曲线L关于直线 $y=x$ 对称。 & 利用变量轮换性质：
+    \newline $\int_{L}f(x,y)ds=\int_{L}f(y,x)ds$。 & \textbf{【注】}：若曲线方程 $F(x,y)=0$ 满足 $F(x,y)=F(y,x)$ 或 $F(x,y)=-F(y,x)$，则曲线关于 $y=x$ 对称。 \\
+    \midrule
+    
+    计算方法 & L由显函数 $y=g(x)$, $a\le x\le b$ 给出。 & 化为定积分：
+    \newline $\int_{L}f(x,y)ds=\int_{a}^{b}f(x,g(x))\sqrt{1+[g^{\prime}(x)]^{2}}dx$。 & 核心是计算弧微分 $ds$。 \\
+    \midrule
+    
+    计算方法 & L由参数方程 $\begin{cases}x=x(t)\\ y=y(t)\end{cases}$, $\alpha\le t\le\beta$ 给出。 & 化为定积分：
+    \newline $\int_{L}f(x,y)ds=\int_{\alpha}^{\beta}f(x(t),y(t))\sqrt{[x^{\prime}(t)]^{2}+[y^{\prime}(t)]^{2}}dt$。 & 适用于复杂的平面曲线或空间曲线。 \\
+    \midrule
+    
+    计算方法 & L由极坐标 $r=r(\theta)$, $\alpha\le\theta\le\beta$ 给出。 & 化为定积分：
+    \newline $\int_{L}f(x,y)ds=\int_{\alpha}^{\beta}f(r\cos\theta,r\sin\theta)\sqrt{r^{2}+r^{\prime2}}d\theta$。 & 适用于积分路径为圆或与圆相关的曲线。 \\
+    \midrule
+    
+    简化运算技巧 & 被积表达式复杂。 & \textbf{代入曲线方程简化运算}：将被积函数中的部分表达式用曲线方程进行替换或化简（例如利用 $x^2+y^2=R^2$）。 & 对称性与代入方程简化通常结合运用。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection*{二、第二类曲线积分（对坐标的曲线积分）}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{2.5cm} p{3.5cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    对称性与两点法 & 有向积分曲线L关于坐标轴对称。 & 根据被积函数关于对应变量的奇偶性以及积分方向判断积分结果。 & \textbf{【两点法】}（简化计算/推导结论）
+    \begin{enumerate}
+        \item 写出点P关于对称轴的对称点P'。
+        \item 写出P和P'对应的被积分式。\textbf{关键注意}：由于曲线有向，对称点的微分项可能会变号（例如关于x轴对称时，若路径方向相反，dx可能变为-dx）。
+        \item 两式相加。若和为零，则总积分为0。
+    \end{enumerate} \\
+    \midrule
+    
+    计算方法 & L由显函数 $y=g(x)$ 给出，起点对应x=a，终点对应x=b。 & 化为定积分：
+    \newline $\int_{L}Pdx+Qdy=\int_{a}^{b}[P(x,g(x))+Q(x,g(x))g^{\prime}(x)]dx$。 & 注意积分上下限必须与曲线方向一致。 \\
+    \midrule
+    
+    计算方法 & L由参数方程给出，起点对应$t=\alpha$，终点对应$t=\beta$。 & 化为定积分：
+    \newline $\int_{L}Pdx+Qdy=\int_{\alpha}^{\beta}[P(x(t),y(t))x^{\prime}(t)+Q(x(t),y(t))y^{\prime}(t)]dt$。 & \textbf{【曲线方程参数化】}：常用于处理空间曲线积分（如两个曲面的交线，例如柱面与平面相交）。需要根据题意正确设定参数方程和方向。 \\
+    \midrule
+    
+    计算方法 & L由极坐标 $r=r(\theta)$ 给出，起点对应$\theta=\alpha$，终点对应$\theta=\beta$。 & 化为定积分（根据讲义公式）：
+    \newline $\int_{L}Pdx+Qdy=\int_{\alpha}^{\beta}\{P[r(\theta)\cos\theta]^{\prime}+Q[r(\theta)\sin\theta]^{\prime}\}d\theta$。 & 注意将x,y代入后对 $\theta$ 求导。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection*{三、格林公式及其应用技巧}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{3cm} p{3cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    格林公式 & 平面闭区域D上的第二类曲线积分。P, Q在D上具有一阶连续偏导数。 & 将沿正向边界L的曲线积分转化为二重积分：
+    \newline $\oint_{L}Pdx+Qdy=\iint_{D}(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y})dxdy$。 & L必须是D的\textbf{所有}正向（通常是逆时针）边界曲线。 \\
+    \midrule
+    
+    格林公式应用技巧一：补线 & 曲线L不是闭曲线，且直接计算不易。 & 
+    \begin{enumerate}
+        \item 作辅助路径 $\Gamma$，使L与$\Gamma$构成闭曲线，围成区域D。
+        \item 利用格林公式计算闭曲线积分。
+        \item 原积分 = 格林公式结果 - 辅助路径上的积分。
+    \end{enumerate} & 
+    \begin{enumerate}
+        \item 要求D内无奇点。
+        \item \textbf{【$\Gamma$的选取】}：使得在 $\Gamma$ 上的积分容易计算，一般取折线或线段。注意构造时保持正向（逆时针）。
+    \end{enumerate} \\
+    \midrule
+    
+    格林公式应用技巧二：补圈挖点 & 闭曲线L所围区域内有奇点（P, Q偏导数不连续或无定义）。 & 
+    \begin{enumerate}
+        \item 在L内部，补上一条包含奇点的小闭曲线 $\Gamma$（挖去奇点），使L和$\Gamma$之间的区域D不含奇点。
+        \item 在D上应用格林公式。
+        \item $\int_{L}Pdx+Qdy=\int_{\Gamma}Pdx+Qdy+\iint_{D}(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y})dxdy$。
+    \end{enumerate} & \textbf{【$\Gamma$的选取】}：使得在 $\Gamma$ 上的积分容易计算。通常选取能消去分母的曲线。例如被积式为 $\frac{xdy-ydx}{4x^{2}+y^{2}}$，可取 $\Gamma$ 为 $4x^{2}+y^{2}=1$。注意L和-$\Gamma$是D的正向边界。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection*{四、路径无关问题与斯托克斯公式}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{2.5cm} p{3.5cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    路径无关问题 & 判断积分与路径无关，或利用该性质求积分、求参数/函数。 & 在单连通域G内，若P, Q有连续偏导数，则路径无关等价于以下条件（满足其一即可）：
+    \begin{enumerate}
+        \item 沿G内任意闭曲线积分为0。
+        \item $Pdx+Qdy$ 是某函数 $U(x,y)$ 的全微分 $dU(x,y)$。
+        \item $\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$ 在G内处处成立。
+    \end{enumerate} & 若积分与路径无关，可以直接将积分写为 $\int_{(x_{1},y_{1})}^{(x_{2},y_{2})}$，并可选择最简单的路径（如折线）进行计算，或求出原函数U。 \\
+    \midrule
+    
+    斯托克斯公式 & 空间有向闭曲线 $\Gamma$ 上的第二类曲线积分。 & 将曲线积分转化为以 $\Gamma$ 为边界的有向曲面 $\Sigma$ 上的曲面积分（计算旋度）：
+    \newline $\oint_{\Gamma}Pdx+Qdy+Rdz=\iint_{\Sigma}\begin{vmatrix}dydz&dxdz&dxdy\\ \frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\ P&Q&R\end{vmatrix}$ & 
+    \begin{enumerate}
+        \item $\Gamma$ 的正向与 $\Sigma$ 的侧符合右手规则。
+        \item P, Q, R需在 $\Sigma$ 上具有一阶连续偏导数。
+    \end{enumerate} \\
+    \midrule
+    
+    斯托克斯公式应用：补线 & 空间曲线 $\Gamma$ 不是闭曲线。 & 补线使之成为闭曲线，然后应用斯托克斯公式，再减去补线上积分。 & 类似于格林公式的补线技巧，但应用于空间曲线。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+
+\newpage
+\section*{第二部分：曲面积分 (Surface Integrals)}
+
+\subsection*{一、第一类曲面积分（对面积的曲面积分）}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{2.5cm} p{3.5cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    对称性与两点法 & 积分曲面 $\Sigma$ 关于坐标平面（如xOy面）对称。 & 根据被积函数关于对应变量（如z）的奇偶性判断积分结果（积分为0或2倍）。 & \textbf{【两点法】}（判断第一类曲面积分对称性）
+    \begin{enumerate}
+        \item 写出点P关于对称面的对称点P'。
+        \item 写出P和P'对应的被积分式（\textbf{注意：dS不变}）。
+        \item 两式相加。若和为零，则总积分为0。
+    \end{enumerate} \\
+    \midrule
+    
+    对称性与两点法 & \textbf{特殊对称性（变量对称性）}：积分曲面 $\Sigma$ 关于特定平面对称（如 $y=x$）。 & 利用变量轮换性质：
+    \newline $\iint_{\Sigma}f(x,y,z)dS=\iint_{\Sigma}f(y,x,z)dS$。 & \textbf{【注】}：若曲面方程 $F(x,y,z)=0$ 满足 $F(x,y,z)=F(y,x,z)$，则曲面关于 $y=x$ 对称。 \\
+    \midrule
+    
+    计算方法：投影法 & 积分曲面由 $z=z(x,y)$ 给出，投影为 $D_{xy}$。 & \textbf{【投影法】}（将曲面积分化为二重积分）：
+    \newline $\iint_{\Sigma}f(x,y,z)dS=\iint_{D_{xy}}f(x,y,z(x,y))\sqrt{1+z_{x}^{2}+{z_{y}}^{2}}dxdy$。 & 核心是计算面积微元 $dS$。同样可以向yOz面或xOz面投影。 \\
+    \midrule
+    
+    特殊应用 & 计算特殊曲面（如柱面被截）的面积。 & \textbf{【弧微分求曲面面积】}：利用弧微分的思想计算曲面面积。 & 适用于计算柱面等侧面积。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection*{二、第二类曲面积分（对坐标的曲面积分）}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{3cm} p{3cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    对称性与两点法 & 积分曲面 $\Sigma$（有向）关于坐标平面对称。 & 根据被积函数的奇偶性以及曲面方向判断积分结果。 & \textbf{【两点法】}（判断第二类曲面积分对称性）
+    \begin{enumerate}
+        \item 写出点P关于对称面的对称点P'。
+        \item 写出P和P'对应的被积分式。\textbf{关键注意}：由于曲面有向，对称点的微分项可能会变号（例如关于xOy面对称时，上侧的dxdy在下侧可能对应-dxdy）。
+        \item 两式相加。若和为零，则总积分为0。
+    \end{enumerate} \\
+    \midrule
+    
+    计算方法一：投影法 & 积分曲面由显函数给出（如 $z=z(x,y)$）。 & \textbf{【投影法】}（分别计算三个分量）：
+    \newline 分别计算 $\iint_{\Sigma}P dydz, \iint_{\Sigma}Q dxdz, \iint_{\Sigma}R dxdy$。
+    \newline 以R为例：$\iint_{\Sigma}Rdxdy=\pm\iint_{D_{xy}}R(x,y,z(x,y))dxdy$。 & \textbf{【符号判断】}：
+    \newline 当曲面法向量与对应轴（如z轴）正向夹角为锐角时取“+”，钝角时取“-”。 \\
+    \midrule
+    
+    计算方法二：利用两类曲面积分的联系 & 通用计算方法，特别是曲面法向量容易求得时。 & 将第二类曲面积分转化为第一类曲面积分：
+    \newline $\iint_{\Sigma}Pdydz+Qdxdz+Rdxdy=\iint_{\Sigma}(P\cos\alpha+Q\cos\beta+R\cos\gamma)dS$。
+    \newline 其中 $\mathbf{n}=(\cos\alpha,\cos\beta,\cos\gamma)$ 是曲面指定侧的单位法向量。 & 
+    \begin{enumerate}
+        \item 关键是计算单位法向量 $\mathbf{n}$（讲义提供了显函数和隐函数的计算公式）。
+        \item \textbf{【正负号判断】}：计算出的法向量需要通过图像判断其与指定侧的方向是相同（取正号）还是相反（取负号）。
+    \end{enumerate} \\
+    \midrule
+    
+    计算方法三：合一投影法 & 积分曲面由显函数（如 $z=z(x,y)$）或隐函数给出。 & \textbf{【合一投影法】}（将三个分量同时投影到一个坐标面）：
+    \newline 若投影到$D_{xy}$（设 $\Sigma: z=z(x,y)$）：
+    \newline $\iint_{\Sigma}Pdydz+Qdxdz+Rdxdy=\iint_{D_{xy}}[P\cdot(-z_{x})+Q\cdot(-z_{y})+R\cdot1]dxdy$。 & 这个方法用起来和方法一差不多。对于隐函数 $F(x,y,z)=0$，可以用偏导数的比值代换。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection*{三、高斯公式及其应用技巧}
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{p{3cm} p{3cm} X p{4.5cm}}
+    \toprule
+    \textbf{一级分类} & \textbf{具体题型/场景} & \textbf{核心解法/步骤} & \textbf{注意/技巧} \\
+    \midrule
+    
+    计算方法四：高斯公式 & 空间闭区域 $\Omega$ 上的曲面积分。P, Q, R在 $\Omega$ 上具有一阶连续偏导数。 & \textbf{【高斯公式】}（将闭曲面积分转化为三重积分）：
+    \newline $\iint_{\Sigma}Pdydz+Qdzdx+Rdxdy = \iiint_{\Omega}(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z})dv$。 & $\Sigma$ 必须是 $\Omega$ 的所有外侧边界曲面。 \\
+    \midrule
+    
+    高斯公式应用技巧一：补面 & 曲面 $\Sigma$ 不是闭曲面，且直接计算不易。 & 
+    \begin{enumerate}
+        \item 作辅助曲面 $\Sigma'$，使 $\Sigma+\Sigma'$ 构成闭曲面，围成区域 $\Omega$。
+        \item 利用高斯公式计算闭曲面积分。
+        \item 原积分 = 高斯公式结果 - 辅助曲面 $\Sigma'$ 上的积分。
+    \end{enumerate} & 
+    \begin{enumerate}
+        \item $\Sigma$ 与 $\Sigma'$ 的方向应构成 $\Omega$ 的外侧。要求$\Omega$内无奇点。
+        \item \textbf{【$\Sigma'$的选取】}：使得在 $\Sigma'$ 上的积分容易计算，一般取平面。
+    \end{enumerate} \\
+    \midrule
+    
+    高斯公式应用技巧二：挖点 & 闭曲面 $\Sigma$ 所围区域内有奇点。 & 
+    \begin{enumerate}
+        \item 在 $\Sigma$ 内部，补上一个包含奇点的小闭曲面 $\Sigma'$（挖去奇点），使 $\Sigma$ 和 $\Sigma'$ 之间的区域 $\Omega$ 不含奇点。
+        \item 在 $\Omega$ 上应用高斯公式。
+        \item 原积分 = $\Sigma'$ 上的积分 + 高斯公式结果。
+    \end{enumerate} & \textbf{【$\Sigma'$的选取】}：使得在 $\Sigma'$ 上的积分容易计算。通常选取能消去分母的曲面。例如被积式分母为 $(x^{2}+y^{2}+z^{2})^{3/2}$，可取 $\Sigma'$ 为小球面 $x^{2}+y^{2}+z^{2}=\epsilon^{2}$。注意方向的配置。 \\
+    
+    \bottomrule
+    \end{tabularx}
+\end{table}

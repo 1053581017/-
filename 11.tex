@@ -1,0 +1,80 @@
+% --- 你的内容 ---
+\chapter{无穷级数}
+\section{常数项级数}
+\subsection{常数项方程}
+
+级数$\sum_{n=1}^{\infty} u_n$ 的前 $n$ 项和
+\begin{equation}\tag{11.1}
+S_n=\sum_{k=1}^{n}u_k
+  =u_1+u_2+\cdots+u_n,\qquad (n=1,2,\ldots)
+\end{equation}
+称为无穷级数的部分和。
+
+若数项级数 $\sum_{n=1}^{\infty} u_n$ 的部分和数列 $\{S_n\}$ 的极限
+$\lim_{n\to\infty}S_n$ 存在，则称级数 $\sum_{n=1}^{\infty} u_n$ 收敛；
+否则称级数 $\sum_{n=1}^{\infty} u_n$ 发散。当级数 $\sum_{n=1}^{\infty} u_n$ 收敛时，称极限值 $\lim_{n\to\infty}S_n$ 为此级数的和，
+即
+\[
+\sum_{n=1}^{\infty} u_n
+  = \lim_{n\to\infty} S_n
+  = \lim_{n\to\infty}\sum_{k=1}^{n} u_k
+  = S .
+\]
+
+% --- 我帮你添加的“压缩映射”部分 ---
+
+\section{压缩映射原理做题步骤}
+
+\subsection{核心思想}
+对于形如 $x_{n+1}=f(x_{n})$ 的数列，如果能证明函数 $f(x)$ 在某个区间上是一个“压缩映射”，即 $|f'(x)| \le k < 1$，那么数列 $\{x_n\}$ 必定会收敛到 $f(x)$ 的不动点 $a$（即 $f(a)=a$）。
+
+这种方法的本质是“先斩后奏”：先假设极限 $a$ 存在并求出它，然后再证明数列确实收敛到 $a$。
+
+\subsection{解题步骤}
+\begin{enumerate}
+    % --- 第 1 步 ---
+    \item \textbf{【先斩后奏，求出不动点 $a$】}
+    \begin{itemize}
+        \item 假设 $\lim_{n \to \infty} x_n = a$ 存在。
+        \item 在递推公式 $x_{n+1} = f(x_n)$ 两边同时取极限，得到 $a = f(a)$。
+        \item 解此方程，求出不动点 $a$ 的值。（注意：有时需要根据 $x_n$ 的有界性，从多个解中筛选出真正的极限值）。
+    \end{itemize}
+
+    % --- 第 2 步 ---
+    \item \textbf{【构造压缩形式】}
+    \begin{itemize}
+        \item 考察 $x_{n+1}$ 与 $a$ 之间的距离，即考察绝对值 $|x_{n+1} - a|$。
+        \item 将 $x_{n+1} = f(x_n)$ 和 $a = f(a)$ 代入，得到：
+        $$ |x_{n+1} - a| = |f(x_n) - f(a)| $$
+    \end{itemize}
+    
+    % --- 第 3 步 ---
+    \item \textbf{【应用拉格朗日中值定理 (MVT)】}
+    \begin{itemize}
+        \item 对 $|f(x_n) - f(a)|$ 应用拉格朗日中值定理，得到：
+        $$ f(x_n) - f(a) = f'(\xi_n)(x_n - a) $$
+        其中 $\xi_n$ 位于 $x_n$ 和 $a$ 之间。
+        \item 将此代回第2步的等式，得到：
+        $$ |x_{n+1} - a| = |f'(\xi_n)| \cdot |x_n - a| $$
+    \end{itemize}
+    
+    % --- 第 4 步 ---
+    \item \textbf{【确定压缩常数 $k$】(关键步骤)}
+    \begin{itemize}
+        \item 证明存在一个 \textbf{常数 $k$}，满足 $0 < k < 1$，使得对于所有的 $n$，都有 $|f'(\xi_n)| \le k$。
+        \item \textbf{常用技巧：} 利用题目条件（如“$f(x)$ 有连续导数”）和闭区间上连续函数的最值定理，找到 $|f'(x)|$ 在相关区间上的最大值，并证明该最大值 $k$ 严格小于 1。
+    \end{itemize}
+    
+    % --- 第 5 步 ---
+    \item \textbf{【递推与夹逼准则】}
+    \begin{itemize}
+        \item 得到核心不等式：
+        $$ |x_{n+1} - a| \le k |x_n - a| $$
+        \item 反复应用此不等式：
+        $$ |x_{n+1} - a| \le k |x_n - a| \le k^2 |x_{n-1} - a| \le \dots \le k^n |x_1 - a| $$
+        \item 因为 $0 < k < 1$，所以 $\lim_{n \to \infty} k^n = 0$。
+        \item 根据夹逼准则（Squeeze Theorem）：
+        $$ 0 \le \lim_{n \to \infty} |x_{n+1} - a| \le \lim_{n \to \infty} \left( k^n |x_1 - a| \right) = 0 $$
+        \item 因此，$\lim_{n \to \infty} |x_{n+1} - a| = 0$，这等价于 $\lim_{n \to \infty} x_n = a$。
+    \end{itemize}
+\end{enumerate}

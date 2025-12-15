@@ -1,0 +1,60 @@
+\chapter{Γ函数}
+
+
+\section*{一、定义}
+
+$\Gamma$ 函数（Gamma Function）是阶乘在实数域上的推广。其定义为定义在 $(0, +\infty)$ 上的广义积分：
+
+\begin{equation}
+    \Gamma(s) = \int_0^{+\infty} x^{s-1} e^{-x} dx \quad (s > 0)
+\end{equation}
+
+\noindent \textbf{注：} 积分变量为 $x$，形式必须为 $x$ 的幂次乘以 $e^{-x}$。
+
+\section*{二、核心性质}
+
+以下性质是解题（尤其是广义积分计算）的关键，需熟练记忆。
+
+\subsection*{1. 递推公式}
+这是 $\Gamma$ 函数最基本的性质，用于降阶：
+\[
+    \Gamma(s+1) = s\Gamma(s)
+\]
+
+\subsection*{2. 阶乘关系}
+当 $n$ 为正整数时，$\Gamma$ 函数与阶乘有如下关系：
+\[
+    \Gamma(n+1) = n!
+\]
+\[
+    \Gamma(n) = (n-1)!
+\]
+
+\subsection*{3. 重要特殊值}
+\begin{itemize}
+    \item \textbf{整数点：}
+    \[
+        \Gamma(1) = 0! = 1
+    \]
+    \item \textbf{半整数点（高斯积分核心）：}
+    \[
+        \Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}
+    \]
+\end{itemize}
+
+\subsection*{4. 半整数推导（由性质 1 与 3 推导）}
+利用递推公式 $\Gamma(s+1) = s\Gamma(s)$：
+\[
+    \Gamma\left(\frac{3}{2}\right) = \frac{1}{2}\Gamma\left(\frac{1}{2}\right) = \frac{\sqrt{\pi}}{2}
+\]
+\[
+    \Gamma\left(\frac{5}{2}\right) = \frac{3}{2} \cdot \frac{1}{2}\Gamma\left(\frac{1}{2}\right) = \frac{3\sqrt{\pi}}{4}
+\]
+
+\section*{三、常用积分公式结论}
+
+基于 $\Gamma$ 函数定义的推广公式（解题神器）：
+
+\[
+    \int_0^{+\infty} x^n e^{-kx} dx = \frac{\Gamma(n+1)}{k^{n+1}} = \frac{n!}{k^{n+1}} \quad (n \in \mathbb{N}, k > 0)
+\]
