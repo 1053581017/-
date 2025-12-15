@@ -1,41 +1,44 @@
 \chapter{场论四大核心概念}
 
-\section{核心工具：倒三角算子 ($\nabla$)}
+\section{核心工具：倒三角算子 (\texorpdfstring{$\nabla$}{nabla})}
 
+\begin{definition}[倒三角算子 $\nabla$]
 所有场论运算的核心都是这个算子。请把它看作一个\textbf{“带求导功能的向量”}。
-
 \begin{itemize}
     \item \textbf{符号}：$\nabla$ 
-    \item \textbf{定义}：$\nabla = \left( \frac{\partial}{\partial x}, \ \frac{\partial}{\partial y}, \ \frac{\partial}{\partial z} \right)$
+    \item \textbf{定义}：$\displaystyle \nabla = \left( \frac{\partial}{\partial x}, \ \frac{\partial}{\partial y}, \ \frac{\partial}{\partial z} \right)$
     \item \textbf{心法}：像操作向量一样操作它（点积、叉积、数乘），但它的动作是“求导”而不是简单的“数值乘法”。
 \end{itemize}
+\end{definition}
 
 \section{深度解析与公式}
 
-\subsection{1. 梯度 ($\text{grad } u$)}
+% 这里的标题去掉了原本的 "1."，直接显示核心概念，配合 definition 环境更突出
+\begin{definition}[梯度 $\operatorname{grad} u$]
 \begin{itemize}
     \item \textbf{定义}：标量场 $u(x,y,z)$ 在某点的最大变化率方向。
     \item \textbf{公式}：
     \[
-        \text{grad } u = \nabla u = \left( \frac{\partial u}{\partial x}, \ \frac{\partial u}{\partial y}, \ \frac{\partial u}{\partial z} \right)
+        \operatorname{grad} u = \nabla u = \left( \frac{\partial u}{\partial x}, \ \frac{\partial u}{\partial y}, \ \frac{\partial u}{\partial z} \right)
     \]
     \item \textbf{性质}：
     \begin{itemize}
-        \item 梯度垂直于等值面（法向量 $\vect{n} = \nabla u$）。
+        \item 梯度垂直于等值面（法向量 $\vec{n} = \nabla u$）。
         \item 模长 $|\nabla u|$ 是该点最大的变化率数值。
     \end{itemize}
 \end{itemize}
+\end{definition}
 
-\subsection{2. 方向导数 ($\frac{\partial u}{\partial l}$)}
+\begin{definition}[方向导数 $\frac{\partial u}{\partial l}$]
 \begin{itemize}
-    \item \textbf{定义}：函数 $u$ 沿\textbf{指定方向} $\vect{l}$ 的变化率。
+    \item \textbf{定义}：函数 $u$ 沿\textbf{指定方向} $\vec{l}$ 的变化率。
     \item \textbf{公式（核心考点）}：
     \[
-        \frac{\partial u}{\partial l} = \nabla u \cdot \vect{e}_l = |\nabla u| \cos\theta
+        \frac{\partial u}{\partial l} = \nabla u \cdot \vec{e}_l = |\nabla u| \cos\theta
     \]
     \begin{itemize}
-        \item $\vect{e}_l$：方向 $\vect{l}$ 的\textbf{单位向量} \textcolor{red}{（做题必坑点：记得单位化！）}。
-        \item $\theta$：梯度与方向 $\vect{l}$ 的夹角。
+        \item $\vec{e}_l$：方向 $\vec{l}$ 的\textbf{单位向量} \textcolor{red}{（做题必坑点：记得单位化！）}。
+        \item $\theta$：梯度与方向 $\vec{l}$ 的夹角。
     \end{itemize}
     \item \textbf{三者关系}：
     \begin{itemize}
@@ -44,41 +47,47 @@
         \item $\theta = \frac{\pi}{2}$（垂直/沿等高线）：方向导数 $= 0$。
     \end{itemize}
 \end{itemize}
+\end{definition}
 
-\subsection{3. 散度 ($\text{div } \vect{A}$)}
+\begin{definition}[散度 $\operatorname{div} \vec{A}$]
 \begin{itemize}
     \item \textbf{定义}：通量对体积的变化率，描述场的“发散”程度。
     \item \textbf{公式（点积法则）}：
-    设 $\vect{A} = (P, Q, R)$，
+    设 $\vec{A} = (P, Q, R)$，
     \[
-        \text{div } \vect{A} = \nabla \cdot \vect{A} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}
+        \operatorname{div} \vec{A} = \nabla \cdot \vec{A} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}
     \]
     \item \textbf{物理意义}：$>0$ 发散（有源）；$<0$ 汇聚（有汇）；$=0$ 无源场。
 \end{itemize}
+\end{definition}
 
-\subsection{4. 旋度 ($\text{rot } \vect{A}$ / $\text{curl } \vect{A}$)}
+\begin{definition}[旋度 $\operatorname{rot} \vec{A}$ / $\operatorname{curl} \vec{A}$]
 \begin{itemize}
     \item \textbf{定义}：环量对面密度的极限，描述场的“旋转”强度。
     \item \textbf{公式（叉积法则 - 背行列式）}：
     \[
-        \text{rot } \vect{A} = \nabla \times \vect{A} = \begin{vmatrix} \vect{i} & \vect{j} & \vect{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}
+        \operatorname{rot} \vec{A} = \nabla \times \vec{A} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}
     \]
     \[
-        = \left(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\right)\vect{i} - \left(\frac{\partial R}{\partial x} - \frac{\partial P}{\partial z}\right)\vect{j} + \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)\vect{k}
+        = \left(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\right)\vec{i} - \left(\frac{\partial R}{\partial x} - \frac{\partial P}{\partial z}\right)\vec{j} + \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)\vec{k}
     \]
 \end{itemize}
+\end{definition}
 
 
 \section{两个重要的“恒等于零” (必考)}
 
+% 使用 property 环境，颜色与 definition 不同，层次更丰富
+\begin{property}[场论重要恒等式]
 \begin{enumerate}
     \item \textbf{梯度的旋度为零}：
-    \[ \text{rot}(\text{grad } u) = \nabla \times (\nabla u) = \vect{0} \]
-    \textit{记忆}：$\vect{a} \times \vect{a} = \vect{0}$（自己不能绕着自己转）。\\
+    \[ \operatorname{rot}(\operatorname{grad} u) = \nabla \times (\nabla u) = \vec{0} \]
+    \textit{记忆}：$\vec{a} \times \vec{a} = \vec{0}$（自己不能绕着自己转）。\\
     \textit{意义}：梯度场（保守场，如重力场、静电场）是无旋的。
     
     \item \textbf{旋度的散度为零}：
-    \[ \text{div}(\text{rot } \vect{A}) = \nabla \cdot (\nabla \times \vect{A}) = 0 \]
-    \textit{记忆}：$\vect{a} \cdot (\vect{a} \times \vect{b}) = 0$（垂直向量点积为0）。\\
+    \[ \operatorname{div}(\operatorname{rot} \vec{A}) = \nabla \cdot (\nabla \times \vec{A}) = 0 \]
+    \textit{记忆}：$\vec{a} \cdot (\vec{a} \times \vec{b}) = 0$（垂直向量点积为0）。\\
     \textit{意义}：旋涡场（如磁场）没有源头，磁感线是闭合的。
 \end{enumerate}
+\end{property}
